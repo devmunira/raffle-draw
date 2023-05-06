@@ -6,15 +6,21 @@ It's an rest api for raffle draw microservice with express js
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- Create new ticket
+- Find all tickets [sorting , pagination , count , filter]
+- Sold tickets find [sorting , pagination , count , filter]
+- Find single ticket
+- Delete single ticket
+- Bulk delete by Id
+- Update ticket by id
+- Bulk update by id only status
+- Sell ticket
+- Ticket qnty management
+- Find tickets by username [sorting , pagination , count , filter]
+- Raffle draw for count 3 winners
 
 
 ## Tech Stack
-
-**Client:** React, Redux, TailwindCSS
 
 **Server:** Node, Express
 
@@ -51,26 +57,17 @@ Takes two numbers and returns the sum.
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY`
+`PORT`
 
 `ANOTHER_API_KEY`
 
-
-## Installation
-
-Install my-project with npm
-
-```bash
-  npm install my-project
-  cd my-project
-```
     
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/devmunira/raffle-draw
 ```
 
 Go to the project directory
@@ -82,13 +79,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  npm install
+  npm init
 ```
 
 Start the server
 
 ```bash
-  npm run start
+  npm run dev
 ```
 
 
@@ -97,6 +94,7 @@ Start the server
 Add badges from somewhere like: [shields.io](https://shields.io/)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
 
 ## Authors
 
