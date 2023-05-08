@@ -1,61 +1,29 @@
 {
     "data": [
         {
-            "id": "GcYmhaW8E",
-            "name": "tickettwo",
-            "price": 4500,
-            "qnty": 2,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:14:17.302Z",
-            "updatedAt": "2023-05-08T11:14:17.302Z"
+            "id": "K4rBOQkWX",
+            "username": "munira",
+            "price": 500,
+            "createdAt": "2023-05-08T13:38:06.343Z",
+            "updatedAt": "2023-05-08T13:38:06.343Z"
         }, {
-            "id": "cQP1cVZsv",
-            "name": "tickettwo",
-            "price": 4500,
-            "qnty": 2,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:21:52.530Z",
-            "updatedAt": "2023-05-08T11:21:52.530Z"
+            "id": "BdI3jNcCP",
+            "username": "munira",
+            "price": 600,
+            "createdAt": "2023-05-08T13:38:37.447Z",
+            "updatedAt": "2023-05-08T13:38:37.447Z"
         }, {
-            "id": "oxKt0dddF",
-            "name": "tickettwo",
-            "price": 4500,
-            "qnty": 2,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:22:45.780Z",
-            "updatedAt": "2023-05-08T11:22:45.780Z"
+            "id": "uzI9XFESA",
+            "username": "munira",
+            "price": 700,
+            "createdAt": "2023-05-08T13:40:41.549Z",
+            "updatedAt": "2023-05-08T13:40:41.549Z"
         }, {
-            "id": "j4yMP29Hp",
-            "name": "tickettwo",
-            "price": 4500,
-            "qnty": 2,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:24:08.971Z",
-            "updatedAt": "2023-05-08T11:24:08.971Z"
-        }, {
-            "price": 4500,
-            "qnty": 2,
-            "id": "j4yMP29Hp",
-            "name": "tickettwo",
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:24:08.971Z",
-            "updatedAt": "2023-05-08T11:24:08.971Z"
-        }, {
-            "id": "GcYmhaW8E",
-            "name": "tickettwo",
-            "price": 120,
-            "qnty": 22,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T11:14:17.302Z",
-            "updatedAt": "2023-05-08T11:14:17.302Z"
-        }, {
-            "id": "2UPqFM1ro",
-            "name": "ticketthree",
-            "price": 2500,
-            "qnty": 20,
-            "soldQnty": 0,
-            "createdAt": "2023-05-08T13:28:10.246Z",
-            "updatedAt": "2023-05-08T13:28:10.246Z"
+            "id": "BnrdkLWhC",
+            "username": "munira",
+            "price": 800,
+            "createdAt": "2023-05-08T13:44:51.048Z",
+            "updatedAt": "2023-05-08T13:44:51.048Z"
         }
     ],
     "meta": {
@@ -63,7 +31,7 @@
             "page": 1,
             "pageSize": 5,
             "pageCount": 1,
-            "total": 14
+            "total": 19
         }
     }
 }

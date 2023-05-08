@@ -2,19 +2,16 @@ const shortId = require("shortid")
 
 /**
  * Create New Ticket object
- * @param {string} name
+ * @param {string} username
  * @param {number} price
- * @param {number} qnty
  * @return {Tickets[]} Tickets Collections
  */
 
 class Ticket {
-    constructor(name,price,qnty){
+    constructor(price,username){
         this.id = shortId.generate();
-        this.name = name
+        this.username = username
         this.price = price
-        this.qnty = qnty
-        this.soldQnty = 0
         this.createdAt = new Date()
         this.updatedAt = new Date()
     };

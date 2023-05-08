@@ -7,10 +7,8 @@ POSt http://localhost:4000/api/v1/tickets
 Content-Type: application/json
 
 {
-    "name"  : "ticketthree",
-    "price" : 2500,
-    "qnty"  : 20
-
+    "username"  : "munira",
+    "price" : 2500
 }
 
 ### get all tickets
@@ -18,7 +16,7 @@ GET http://localhost:4000/api/v1/tickets
 
 
 ### get all tickets with filter
-GET http://localhost:4000/api/v1/tickets?filter[name]=tickettwo&filter[price]=500&filter[qnty]=2&sort=asc&skip=2&limit=5
+GET http://localhost:4000/api/v1/tickets?filter[username]=munira&sort=asc&limit=1&page=2
 
 
 ### get all tickets with sort , skip , limit

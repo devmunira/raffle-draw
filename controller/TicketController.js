@@ -1,16 +1,24 @@
 const {WriteFile, ReadFile} = require("../helper/file");
 const Ticket = require("../model/Ticket");
-const { createTicketService } = require("../service/TicketService");
+const {createTicketService} = require("../service/TicketService");
 
-// Ticket Add to file
+
+//TODO:['draw','pagination','code structure','testing','remove file']
+
+// Single ticket add to file
 exports.CreateTicket = (req, res, next) => {
     try {
-        const {name, price, qnty} = req.body;
-        const body = new Ticket(name, price, qnty)
+        const {price, username} = req.body;
+        const body = new Ticket(price, username)
         createTicketService({body})
         res
-        .status(201)
-        .json({message: "Ticket Created Successfully", ticket: { body }})
+            .status(201)
+            .json({
+                message: "Ticket Created Successfully",
+                ticket: {
+                    ...body
+                }
+            })
     } catch (err) {
         let error = err.message;
         error.status = 400;
@@ -21,16 +29,16 @@ exports.CreateTicket = (req, res, next) => {
 // All tickets get from file
 exports.getAllTickets = (req, res, next) => {
     try {
-        const {filter, sort, limit, skip} = req.query;
-        const data = ReadFile('Ticket.json');
+        const {filter, sort, limit, skip, page} = req.query;
+        let file = ReadFile('Ticket.json');
+        let data = file.data;
         let result = [];
-
         if (Object.keys(req.query).length > 0) {
             if (filter) {
-                if (filter.name) {
+                if (filter.username) {
                     result = [
                         ...result,
-                        ...data.filter((item) => item.name.toLowerCase() == filter.name.toLowerCase())
+                        ...data.filter((item) => item.username.toLowerCase() == filter.username.toLowerCase())
                     ];
                 }
                 if (filter.price) {
@@ -46,10 +54,6 @@ exports.getAllTickets = (req, res, next) => {
 
                 if (skip) {
                     result = result.splice(skip)
-                }
-
-                if (limit) {
-                    result = result.splice(0, limit)
                 }
 
                 if (sort) {
@@ -68,12 +72,6 @@ exports.getAllTickets = (req, res, next) => {
                 if (skip) {
                     result = data.splice(skip)
                 }
-                if (limit) {
-                    result = result.length == 0
-                        ? data.splice(0, limit)
-                        : result.splice(0, limit)
-                }
-
                 if (sort) {
                     result = result.length == 0
                         ? data
@@ -91,20 +89,58 @@ exports.getAllTickets = (req, res, next) => {
                 }
             }
 
-            result = [
-                ...result,
-                result['meta'] = {
-                    count: 1
+            if (page == 1 || !page) {
+                result = {
+                    data: [...result.splice(0, parseInt(limit) ?? 2)],
+                    meta: {
+                        pagination: {
+                            page: 1,
+                            pageSize: parseInt(limit) ?? 2,
+                            pageCount: Math.ceil(result.length / limit ?? 2),
+                            total: result.length
+                        }
+                    }
                 }
-            ]
+            } else {
+                result = {
+                    data: [...result.splice(page - 1 * parseInt(limit) ?? 2, parseInt(limit) ?? 2)],
+                    meta: {
+                        pagination: {
+                            page: parseInt(page),
+                            pageSize: parseInt(limit) ?? 2, //5
+                            pageCount: Math.ceil(result.length / limit ?? 2), // 2
+                            total: result.length //10
+                        }
+                    }
+                }
+            }
         } else {
-            result = [
-                ...data, {
-                    count: data.length
+            if (page == 1 || !page) {
+                result = {
+                    data: [...data.splice(0, 2)],
+                    meta: {
+                        pagination: {
+                            page: 1,
+                            pageSize: 2,
+                            pageCount: Math.ceil(data.length / 2),
+                            total: data.length
+                        }
+                    }
                 }
-            ];
+            } else {
+                result = {
+                    data: [...data.splice(page - 1 * 2, 2)],
+                    meta: {
+                        pagination: {
+                            page: parseInt(page),
+                            pageSize: 2, //5
+                            pageCount: Math.ceil(data.length / 2), // 2
+                            total: data.length //10
+                        }
+                    }
+                }
+            }
         }
-
         if (result.length == 0) {
             let error = 'No Tickets Found';
             error.status = 404;
@@ -160,7 +196,7 @@ exports.updateOrCreateTicket = (req, res, next) => {
                 ],
                 meta: {
                     ...file.meta,
-                    ...file.meta.pagination.total = file.meta.pagination.total + 1
+                    // ...file.meta.pagination.total = file.meta.pagination.total + 1
                 }
             }
             WriteFile('./db/Ticket.json', objNew);
@@ -178,7 +214,7 @@ exports.updateOrCreateTicket = (req, res, next) => {
                 ],
                 meta: {
                     ...file.meta,
-                    ...file.meta.pagination.total = file.meta.pagination.total + 1
+                    // ...file.meta.pagination.total = file.meta.pagination.total + 1
                 }
             }
             WriteFile('./db/Ticket.json', objOld);
