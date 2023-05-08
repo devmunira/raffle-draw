@@ -8,7 +8,6 @@ It's an rest api for raffle draw microservice with express js
 
 - Create new ticket
 - Find all tickets [sorting , pagination , count , filter]
-- Sold tickets find [sorting , pagination , count , filter]
 - Find single ticket
 - Delete single ticket
 - Bulk delete by Id
@@ -26,6 +25,14 @@ It's an rest api for raffle draw microservice with express js
 
 
 ## API Reference
+
+
+#### Health Route
+
+```http
+  GET /api/v1/health
+```
+
 
 #### Get all items
 

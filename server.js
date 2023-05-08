@@ -5,11 +5,8 @@ const morgan =require('morgan');
 const cors = require('cors')
 
 // MIDDLEWARE ADD
-app.use(express.json()); //parses incoming requests with JSON payloads 
-app.use(express.urlencoded({extended : true})); // get form data from url
-app.use(morgan('dev')) //log HTTP requests and errors, and simplifies the process
-app.use(cors())
-app.use(require('./router/web')) //router
+app.use([express.json() , express.urlencoded({extended : true}) , morgan('dev') , cors()]);
+app.use('/api/v1' , require('./router/api'))
 
 // GLOBAL ERROR HANDELAR
 app.use((_req,_res,next) => {
@@ -20,9 +17,11 @@ app.use((_req,_res,next) => {
 
 app.use((error,_req,res,_next)=>{
     if(error.status){
-        res.status(error.status).send(`<h1>${error.message}</h1>`)
+        res.status(error.status).json({
+            message : error.message
+        })
     }else{
-        res.status(500).send('<h1>SERVER ERROR HAPPENS</h1>')
+        res.status(500).json({message : error})
     }
 
 })

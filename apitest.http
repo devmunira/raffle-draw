@@ -1,0 +1,21 @@
+### check api health
+GET http://localhost:4000/api/v1/health
+
+
+### create new tickets
+POSt http://localhost:4000/api/v1/tickets
+Content-Type: application/json
+
+{
+    "name" : "tickettwo",
+    "price" : 100,
+    "qnty" : 2
+
+}
+
+### get all tickets
+GET http://localhost:4000/api/v1/tickets
+
+
+### get single ticket by id
+GET http://localhost:4000/api/v1/tickets/K8rz8uE7m
