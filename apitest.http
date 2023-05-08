@@ -7,9 +7,9 @@ POSt http://localhost:4000/api/v1/tickets
 Content-Type: application/json
 
 {
-    "name" : "tickettwo",
-    "price" : 100,
-    "qnty" : 2
+    "name"  : "ticketthree",
+    "price" : 2500,
+    "qnty"  : 20
 
 }
 
@@ -17,5 +17,30 @@ Content-Type: application/json
 GET http://localhost:4000/api/v1/tickets
 
 
+### get all tickets with filter
+GET http://localhost:4000/api/v1/tickets?filter[name]=tickettwo&filter[price]=500&filter[qnty]=2&sort=asc&skip=2&limit=5
+
+
+### get all tickets with sort , skip , limit
+GET http://localhost:4000/api/v1/tickets?sort=asc&skip=2&limit=5
+
+
+
 ### get single ticket by id
-GET http://localhost:4000/api/v1/tickets/K8rz8uE7m
+GET http://localhost:4000/api/v1/tickets/j4yMP29Hp
+
+
+
+### update or create new tickets
+PUT http://localhost:4000/api/v1/tickets/ZMozMM-IO
+Content-Type: application/json
+
+{
+    "price" : 100,
+    "qnty" : 22
+}
+
+
+
+### delete single ticket by id
+DELETE  http://localhost:4000/api/v1/tickets/ZMozMM-IO

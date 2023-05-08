@@ -1,16 +1,23 @@
 const {WriteFile, ReadFile} = require("../helper/file");
-const Ticket = require("../model/Ticket");
-const { createTicketService } = require("../service/TicketService");
+const Ticket = require("../model/Ticket")
 
 // Ticket Add to file
 exports.CreateTicket = (req, res, next) => {
     try {
         const {name, price, qnty} = req.body;
+        const data = ReadFile('Ticket.json');
         const body = new Ticket(name, price, qnty)
-        createTicketService({body})
+        WriteFile('./db/Ticket.json', [
+            ...data, {
+                ...body
+            }
+        ]);
         res
-        .status(201)
-        .json({message: "Ticket Created Successfully", ticket: { body }})
+            .status(201)
+            .json({message: "Ticket Created Successfully", ticket: {
+                    body
+                }})
+
     } catch (err) {
         let error = err.message;
         error.status = 400;
@@ -91,18 +98,9 @@ exports.getAllTickets = (req, res, next) => {
                 }
             }
 
-            result = [
-                ...result,
-                result['meta'] = {
-                    count: 1
-                }
-            ]
+            result = [...result , result['meta'] => {count : 1}]
         } else {
-            result = [
-                ...data, {
-                    count: data.length
-                }
-            ];
+            result = [...data , {count : data.length}];
         }
 
         if (result.length == 0) {
@@ -125,9 +123,7 @@ exports.getSingleTicket = (req, res, next) => {
     try {
         const {id} = req.params;
         const data = ReadFile('Ticket.json');
-        const ticket = data
-            .data
-            .find((item) => item.id == id)
+        const ticket = data.find((item) => item.id == id)
         if (!ticket) {
             let error = 'No Ticket Found';
             error.status = 404;
@@ -147,41 +143,18 @@ exports.updateOrCreateTicket = (req, res, next) => {
     try {
         const {price, qnty} = req.body;
         const {id} = req.params;
-        const file = ReadFile('Ticket.json');
-        const ticket = file
-            .data
-            .find((item) => item.id == id)
+        const data = ReadFile('Ticket.json');
+        const ticket = data.find((item) => item.id == id)
         if (!ticket) {
-            const objNew = {
-                data: [
-                    ...file.data, {
-                        ...new Ticket(name = "demo", price, qnty)
-                    }
-                ],
-                meta: {
-                    ...file.meta,
-                    ...file.meta.pagination.total = file.meta.pagination.total + 1
+            WriteFile('./db/Ticket.json', [
+                ...data, {
+                    ...new Ticket(name = "demo", price, qnty)
                 }
-            }
-            WriteFile('./db/Ticket.json', objNew);
+            ]);
         } else {
-            const t = {
-                ...ticket,
-                price: price ?? ticket.price,
-                qnty: qnty ?? ticket.qnty
-            }
-            const objOld = {
-                data: [
-                    ...file.data, {
-                        ...t
-                    }
-                ],
-                meta: {
-                    ...file.meta,
-                    ...file.meta.pagination.total = file.meta.pagination.total + 1
-                }
-            }
-            WriteFile('./db/Ticket.json', objOld);
+            ticket.price = price ?? ticket.price
+            ticket.qnty = qnty ?? ticket.qnty
+            WriteFile('./db/Ticket.json', data);
         }
 
         res
@@ -200,15 +173,8 @@ exports.deleteSingleTicket = (req, res, next) => {
     try {
         const {id} = req.params;
         const data = ReadFile('Ticket.json');
-        const ticket = data
-            .data
-            .filter((item) => item.id !== id)
-        WriteFile('./db/Ticket.json', {
-            data: [...ticket],
-            meta: {
-                ...data.meta
-            }
-        });
+        const ticket = data.filter((item) => item.id !== id)
+        WriteFile('./db/Ticket.json', ticket);
         res
             .status(202)
             .json({message: "Data Deleted Successfully"})

@@ -22,3 +22,14 @@ exports.ReadFile = (url) => {
 exports.WriteFile =  (url,data) => {
     return fs.writeFileSync(path.resolve(url) , JSON.stringify(data));
 }
+
+
+/**
+ * Append data in file
+ * @param {string} path
+ * @param {string{}} data
+ * @returns {data[]} filedata Collection
+ */
+exports.AppendFile =  (url,data) => {
+    return fs.appendFileSync(path.resolve(url) , JSON.stringify(data));
+}
