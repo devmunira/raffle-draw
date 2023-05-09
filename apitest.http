@@ -5,18 +5,33 @@ GET http://localhost:4000/api/v1/health
 ### create new tickets
 POSt http://localhost:4000/api/v1/tickets
 Content-Type: application/json
-
 {
     "username"  : "munira",
-    "price" : 2500
+    "price" : 1200
 }
 
+
+### create bulk tickets
+POSt http://localhost:4000/api/v1/tickets/bulk
+Content-Type: application/json
+
+{
+    "username"  : "fatema",
+    "price" : 1200,
+    "qnty" : 1
+}
+
+
+### get all tickets by username
+GET http://localhost:4000/api/v1/tickets/username/zubu
+
+
 ### get all tickets
-GET http://localhost:4000/api/v1/tickets
+GET http://localhost:4000/api/v1/tickets?limit=10&skip=2&sort=desc
 
 
 ### get all tickets with filter
-GET http://localhost:4000/api/v1/tickets?filter[username]=munira&sort=asc&limit=1&page=2
+GET http://localhost:4000/api/v1/tickets?filter[username]=munira&limit=1&skip=1&sort=desc
 
 
 ### get all tickets with sort , skip , limit
@@ -25,20 +40,30 @@ GET http://localhost:4000/api/v1/tickets?sort=asc&skip=2&limit=5
 
 
 ### get single ticket by id
-GET http://localhost:4000/api/v1/tickets/j4yMP29Hp
+GET http://localhost:4000/api/v1/tickets/50v7kT8Ev
 
 
 
 ### update or create new tickets
-PUT http://localhost:4000/api/v1/tickets/ZMozMM-IO
+PUT http://localhost:4000/api/v1/tickets/SsKx7iIFe
 Content-Type: application/json
 
 {
-    "price" : 100,
-    "qnty" : 22
+    "price" : 250
 }
 
 
 
 ### delete single ticket by id
 DELETE  http://localhost:4000/api/v1/tickets/ZMozMM-IO
+
+
+
+
+### delete tickets by username
+DELETE  http://localhost:4000/api/v1/tickets/zubu
+
+
+
+### draw winner
+GET http://localhost:4000/api/v1/tickets/draw?count=2

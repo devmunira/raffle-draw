@@ -1,29 +1,53 @@
 {
     "data": [
         {
-            "id": "K4rBOQkWX",
-            "username": "munira",
+            "id": "4QgqR2HRk",
+            "username": "zubu",
+            "price": 1200,
+            "createdAt": "2023-05-09T12:06:32.795Z",
+            "updatedAt": "2023-05-09T12:06:32.795Z"
+        }, {
+            "id": "pNadjDzYSV",
+            "username": "zubu",
+            "price": 1200,
+            "createdAt": "2023-05-09T12:06:32.795Z",
+            "updatedAt": "2023-05-09T12:06:32.795Z"
+        }, {
+            "id": "Av9W2EXm9c",
+            "username": "zubu",
+            "price": 1300,
+            "createdAt": "2023-05-09T12:06:32.795Z",
+            "updatedAt": "2023-05-09T12:06:32.795Z"
+        }, {
+            "id": "JAehFUatI2",
+            "username": "zubu",
+            "price": 120580,
+            "createdAt": "2023-05-09T12:06:32.795Z",
+            "updatedAt": "2023-05-09T12:06:32.795Z"
+        }, {
+            "id": "TG0Nv7lb2U",
+            "username": "zubu",
             "price": 500,
-            "createdAt": "2023-05-08T13:38:06.343Z",
-            "updatedAt": "2023-05-08T13:38:06.343Z"
+            "createdAt": "2023-05-09T12:06:32.795Z",
+            "updatedAt": "2023-05-09T12:06:32.795Z"
         }, {
-            "id": "BdI3jNcCP",
+            "id": "DIhBjA3NG",
             "username": "munira",
-            "price": 600,
-            "createdAt": "2023-05-08T13:38:37.447Z",
-            "updatedAt": "2023-05-08T13:38:37.447Z"
+            "price": 1200,
+            "createdAt": "2023-05-09T12:06:42.700Z",
+            "updatedAt": "2023-05-09T12:06:42.700Z"
         }, {
-            "id": "uzI9XFESA",
+            "id": "4JUgpRjKlo",
             "username": "munira",
-            "price": 700,
-            "createdAt": "2023-05-08T13:40:41.549Z",
-            "updatedAt": "2023-05-08T13:40:41.549Z"
+            "price": 100,
+            "createdAt": "2023-05-09T12:06:42.701Z",
+            "updatedAt": "2023-05-09T12:06:42.701Z"
         }, {
-            "id": "BnrdkLWhC",
-            "username": "munira",
-            "price": 800,
-            "createdAt": "2023-05-08T13:44:51.048Z",
-            "updatedAt": "2023-05-08T13:44:51.048Z"
+            "id": "i9fzAww7E",
+            "username": "fatema",
+            "price": 1200,
+            "createdAt": "2023-05-09T12:06:48.592Z",
+            "updatedAt": "2023-05-09T12:06:48.592Z"
         }
     ],
     "meta": {
@@ -31,7 +55,7 @@
             "page": 1,
             "pageSize": 5,
             "pageCount": 1,
-            "total": 19
+            "total": 2
         }
     }
 }

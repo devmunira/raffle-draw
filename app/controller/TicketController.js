@@ -38,6 +38,7 @@ exports.bulkTicketCreate = (req, res, next) => {
     }
 }
 
+
 // All tickets get from file
 exports.getAllTickets = (req, res, next) => {
     try {
@@ -45,9 +46,9 @@ exports.getAllTickets = (req, res, next) => {
         let file = ReadFile('Ticket.json');
         let data = file.data;
         let result = [];
-        if (Object.keys(req.query).length > 0) {
-            if (filter) {
-                if (filter.username) {
+
+        if (filter !== undefined) {
+            if (filter.username) {
                     result = [
                         ...result,
                         ...data.filter((item) => item.username.toLowerCase() == filter.username.toLowerCase())
@@ -75,80 +76,56 @@ exports.getAllTickets = (req, res, next) => {
                     }
 
                 }
-            } else if (!filter) {
-                if (skip) {
-                    result = data.splice(skip)
-                }
-                if (sort) {
-                    result = result.length == 0
-                        ? data
-                        : result;
-                    if (sort == 'asc') {
-                        result = result.sort((a, b) => {
-                            return parseFloat(a.price) - parseFloat(b.price);
-                        })
-                    } else {
-                        result = result.sort((a, b) => {
-                            return parseFloat(b.price) - parseFloat(a.price);
-                        })
-                    }
-
-                }
-            }
-
-            if (page == 1 || !page) {
+                if (limit) {
+                    result = result.splice(0, limit)
+                }                
+                
                 result = {
-                    data: [...result.splice(0, parseInt(limit) ?? 2)],
-                    meta: {
-                        pagination: {
-                            page: 1,
-                            pageSize: parseInt(limit) ?? 2,
-                            pageCount: Math.ceil(result.length / limit ?? 2),
-                            total: result.length
-                        }
-                    }
-                }
-            } else {
-                result = {
-                    data: [...result.splice(page - 1 * parseInt(limit) ?? 2, parseInt(limit) ?? 2)],
                     meta: {
                         pagination: {
                             page: parseInt(page),
-                            pageSize: parseInt(limit) ?? 2, //5
-                            pageCount: Math.ceil(result.length / limit ?? 2), // 2
+                            pageSize: parseInt(limit) ?? 5, //5
+                            pageCount: Math.ceil(result.length / limit ?? 5), // 2
                             total: result.length //10
-                        }
+                        },
+                    data: [...result],
                     }
                 }
+        }else {
+            if (skip) {
+                data = data.splice(skip)
             }
-        } else {
-            if (page == 1 || !page) {
-                result = {
-                    data: [...data.splice(0, 2)],
-                    meta: {
-                        pagination: {
-                            page: 1,
-                            pageSize: 2,
-                            pageCount: Math.ceil(data.length / 2),
-                            total: data.length
-                        }
-                    }
+            if (sort) {
+                if (sort == 'asc') {
+                    data = data.sort((a, b) => {
+                        return parseFloat(a.price) - parseFloat(b.price);
+                    })
+                } else {
+                    data = data.sort((a, b) => {
+                        return parseFloat(b.price) - parseFloat(a.price);
+                    })
                 }
-            } else {
-                result = {
-                    data: [...data.splice(page - 1 * 2, 2)],
-                    meta: {
-                        pagination: {
-                            page: parseInt(page),
-                            pageSize: 2, //5
-                            pageCount: Math.ceil(data.length / 2), // 2
-                            total: data.length //10
-                        }
+
+            }
+            if (limit) {
+                data = data.splice(0, limit)
+            }
+            result = {
+                meta: {
+                    pagination: {
+                        page: 1,
+                        pageSize: parseInt(limit) ?? 5,
+                        pageCount: Math.ceil(data.length / parseInt(limit) ?? 5),
+                        total: data.length
                     }
-                }
+                },
+                data: [...data],
             }
         }
-        if (result.length == 0) {
+
+
+
+        if (Object.keys(result).length == 0) {
             let error = 'No Tickets Found';
             error.status = 404;
             next(error);
@@ -162,6 +139,7 @@ exports.getAllTickets = (req, res, next) => {
     }
 
 }
+
 
 // get single ticket by id
 exports.getSingleTicketById = (req, res, next) => {
